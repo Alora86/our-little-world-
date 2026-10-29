@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do you love me?</title>
+    <style>
+        body {
+            background-color: #fce4ec;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .gif-container img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 50px;
+        }
+
+        button {
+            padding: 10px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="gif-container">
+            <img id="imageGif" src="https://media.giphy.com/media/LefjG4W80m8xN8pD3w/giphy.gif" alt="Cute Bear">
+        </div>
+        <h1 id="question">DO you love me? 😊</h1>
+        <p id="subtext">–I am all yours</p>
+        
+        <div class="buttons" id="buttonGroup">
+            <button id="yesBtn" onclick="sayYes()">Yes</button>
+            <button id="noBtn" onclick="moveNo()">No</button>
+        </div>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+
+        const messages = [
+            { text: "Please think again! 🤨", sub: "Don't say no so quickly 😒", gif: "https://media.giphy.com/media/2vyPkz2x4H55a/giphy.gif" },
+            { text: "Think about it one more time! 😣", sub: "Why are you doing this to me 🥺", gif: "https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif" },
+            { text: "Baby please agree! How much will you play hard to get 😭", sub: "Show some mercy please 🥺", gif: "https://media.giphy.com/media/1wXfgqVp7c4gD8gVpL/giphy.gif" }
+        ];
+
+        function moveNo() {
+            const noBtn = document.getElementById("noBtn");
+            const question = document.getElementById("question");
+            const subtext = document.getElementById("subtext");
+            const imageGif = document.getElementById("imageGif");
+
+            if (noClickCount < messages.length) {
+                question.innerText = messages[noClickCount].text;
+                subtext.innerText = messages[noClickCount].sub;
+                imageGif.src = messages[noClickCount].gif;
+                noClickCount++;
+            } else {
+                // After all messages, make the 'No' button run away randomly
+                noBtn.style.position = "absolute";
+                const maxX = window.innerWidth - 150;
+                const maxY = window.innerHeight - 100;
+                noBtn.style.left = Math.random() * maxX + "px";
+                noBtn.style.top = Math.random() * maxY + "px";
+            }
+        }
+
+        function sayYes() {
+            const container = document.querySelector(".container");
+            container.innerHTML = `
+                <div class="gif-container">
+                    <img src="https://media.giphy.com/media/1gVUaeXkS8b47T8k70/giphy.gif" alt="Happy Bear">
+                </div>
+                <h1>Hehehehe, I knew it! Love you a lot 🥰</h1>
+            `;
+        }
+    </script>
+
+</body>
+</html>
